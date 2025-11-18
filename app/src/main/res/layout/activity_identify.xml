@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical"
+        tools:context=".UI.IdentifyActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please Scan the RFID Asset tag:"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/off_white">
+            <TextView
+                android:id="@+id/viewscanidentify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                />
+
+            <Button
+                android:id="@+id/scanBtnIdentify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/ic_search"
+                android:text="SCAN"
+                android:padding="10dp"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/off_white"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tag ID:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/tagidtv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cost Center:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/costcentertv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Asset Primary Key:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/assetprimarykeytv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Asset Class 1:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/assetclass1tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Plant:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/plannttv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Department:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/departmenttv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Username:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/usernametv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Location:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/locationtv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/descriptiontv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Assets Sub Class:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/assetsubclasstv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SBU:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/sbutv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Capitalized:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/capitalizedtv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Model:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/modeltv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Serial Number:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/serialnotv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Po Number:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/ponotv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Asset Type:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/assettypetv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Status:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/statustv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Make/Oem:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/makeoemtv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vendor:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/vendortv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Finance Asset:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/financeassettv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quantity:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/quantitytv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Asset Status:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/assetStatustv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Asset Class 2:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/assetclass2tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Month Year of Purchase:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/monthyearofPurchasetv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="IT Assets Code:"
+                android:padding="10dp"
+                android:layout_weight="1.1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/itassetscodetv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/off_white"
+                android:layout_weight="0.9"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

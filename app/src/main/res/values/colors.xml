@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#e7f0fd</color>
+    <color name="off_white">#e7f0fd</color>
+    <color name="primary">#9970F6</color>
+    <color name="secondary">#6144A5</color>
+    <color name="blue_400">#9973F1</color>
+    <color name="blue_700">#543893</color>
+    <color name="red">#EA4335</color>
+    <!--<color name="primary">#763CFA</color>
+    <color name="secondary">#FF3700B3</color>
+    <color name="blue_400">#763CFA</color>
+    <color name="blue_700">#FF3700B3</color>-->
+</resources>

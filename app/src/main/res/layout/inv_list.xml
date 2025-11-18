@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id = "@+id/relativeLayout1"
+        android:layout_width = "fill_parent"
+        android:layout_height = "wrap_content"
+        android:background = "@color/blue_700" >
+
+        <TextView
+            android:layout_width = "0dp"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "1"
+            android:gravity = "center"
+            android:padding = "2dp"
+            android:text = "Finance ID"
+            android:textColor = "#ffffff" />
+
+        <TextView
+            android:layout_width = "0dp"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "1"
+            android:gravity = "center"
+            android:padding = "2dp"
+            android:text = "IT Asset Code"
+            android:textColor = "#ffffff" />
+
+        <TextView
+            android:layout_width = "0dp"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "1"
+            android:gravity = "center"
+            android:padding = "2dp"
+            android:text = "Item Name"
+            android:textColor = "#ffffff"/>
+
+        <TextView
+            android:layout_width = "0dp"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "0.5"
+            android:gravity = "center"
+            android:padding = "2dp"
+            android:text = "Status"
+            android:textColor = "#ffffff" />
+    </LinearLayout>
+    <ListView
+        android:id = "@+id/listviewtable"
+
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:divider = "@null"
+        tools:listitem="@layout/inv_row"
+        />
+
+</LinearLayout>
