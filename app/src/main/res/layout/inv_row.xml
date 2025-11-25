@@ -11,59 +11,55 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id = "@+id/relativeLayout1"
+        android:id = "@+id/cardlayout"
         android:layout_width = "match_parent"
         android:layout_height = "wrap_content"
-        android:background = "@color/white" >
+        android:background = "@color/bg_100" >
 
         <TextView
             android:id = "@+id/financeIDscan"
-            android:layout_width = "0dp"
-            android:layout_height = "match_parent"
-            android:layout_weight = "1"
+            android:layout_width = "110dp"
+            android:layout_height = "wrap_content"
             android:scrollbars="horizontal"
             android:background = "@drawable/cell_shape"
             android:ellipsize = "end"
             android:gravity="center"
             android:padding = "5dp"
-            android:text = "Finance ID"
+            android:text = "@string/financeId"
             android:singleLine = "true" />
 
         <TextView
             android:id = "@+id/assetIDscan"
-            android:layout_width = "0dp"
-            android:layout_height = "match_parent"
-            android:layout_weight = "1"
+            android:layout_width = "120dp"
+            android:layout_height = "wrap_content"
             android:scrollbars="horizontal"
             android:background = "@drawable/cell_shape"
             android:ellipsize = "end"
             android:gravity="center"
             android:padding = "5dp"
-            android:text = "Asset ID"
+            android:text = "@string/assetCode"
             android:singleLine = "true" />
 
         <TextView
             android:id = "@+id/itemName"
-            android:layout_width = "0dp"
-            android:layout_height = "match_parent"
-            android:layout_weight = "1"
+            android:layout_width = "110dp"
+            android:layout_height = "wrap_content"
             android:background = "@drawable/cell_shape"
             android:ellipsize = "end"
             android:gravity="center"
             android:padding = "5dp"
-            android:text = "Item Name"
+            android:text = "@string/itemName"
             android:singleLine = "true" />
 
         <TextView
             android:id = "@+id/status"
-            android:layout_width = "0dp"
-            android:layout_height = "match_parent"
-            android:layout_weight = "0.5"
+            android:layout_width = "120dp"
+            android:layout_height = "wrap_content"
             android:background = "@drawable/cell_shape"
             android:ellipsize = "end"
             android:gravity="center"
             android:padding = "5dp"
-            android:text = "Status"
+            android:text = "@string/status"
             android:singleLine = "true" />
     </LinearLayout>
 </LinearLayout>

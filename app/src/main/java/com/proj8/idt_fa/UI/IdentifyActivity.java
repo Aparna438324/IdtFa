@@ -52,15 +52,16 @@ public class IdentifyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_identify);
-        setHeaderTitle("Identify");
+        setHeaderTitle(true,"Identify");
 
         helperFunctions=new HelperFunctions();
+        ReaderManager.getInstance().setReaderPower(10);
 
-        updateConnectionStatus(ReaderManager.getInstance().isConnected());
+        /*updateConnectionStatus(ReaderManager.getInstance().isConnected());
 
         ReaderManager.getInstance().setStatusListener(isConnected -> {
             runOnUiThread(() -> updateConnectionStatus(isConnected));
-        });
+        });*/
 
         Viewscanidentify = findViewById(R.id.viewscanidentify);
 
@@ -121,6 +122,7 @@ public class IdentifyActivity extends BaseActivity {
                 runOnUiThread(() -> {
                     helperFunctions.hideProgress();
                     setIdentifyCheck(epc);
+                    ReaderManager.getInstance().sound();
                 });
             }
 

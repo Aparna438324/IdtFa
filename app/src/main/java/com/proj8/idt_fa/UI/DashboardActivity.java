@@ -16,24 +16,25 @@ import com.proj8.idt_fa.RfidReader.ReaderManager;
 public class DashboardActivity extends BaseActivity {
 
     ReaderInterface reader;
-    Button identifyBtn,inventoryBtn;
+    Button identifyBtn,inventoryBtn,searchBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         identifyBtn=findViewById(R.id.identifyBtn);
         inventoryBtn=findViewById(R.id.inventoryBtn);
+        searchBtn=findViewById(R.id.searchBtn);
 
         reader = ReaderManager.getInstance(DashboardActivity.this);
         reader.initUhf(10);
-        setHeaderTitle("Dashboard");
+        setHeaderTitle(false,"Dashboard");
 
 //        updateConnectionStatus(ReaderManager.getInstance().isConnected());
 
-        ReaderManager.getInstance().setStatusListener(isConnected -> {
+        /*ReaderManager.getInstance().setStatusListener(isConnected -> {
             Log.d("IdtFa: ","First connect");
             runOnUiThread(() -> updateConnectionStatus(isConnected));
-        });
+        });*/
 
         identifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +50,13 @@ public class DashboardActivity extends BaseActivity {
                 startActivity(idtbtn);
             }
         });
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent idtbtn = new Intent(getApplicationContext(),SearchActivity.class);
+                startActivity(idtbtn);
+            }
+        });
 
 
     }
@@ -59,7 +67,6 @@ public class DashboardActivity extends BaseActivity {
         ReaderManager reader = ReaderManager.getInstance(this);
 
         if (!reader.isInitialized()) {
-            // Initialize only once
             reader.initUhf(10);
         } else {
             if (!reader.isConnected()) {

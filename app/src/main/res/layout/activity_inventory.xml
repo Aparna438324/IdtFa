@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.1"
                 android:padding="10dp"
-                android:text="Plant:"
+                android:text="@string/plantLabel"
                 android:textStyle="bold" />
 
             <RelativeLayout
@@ -62,7 +62,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:visibility="gone"
             android:orientation="horizontal"
             android:weightSum="2">
 
@@ -71,17 +70,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.1"
                 android:padding="10dp"
-                android:text="Department:"
-                android:textStyle="bold" /><!--
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Asset Type:"
-            android:padding="10dp"
-            android:layout_weight="1.1"
-            android:textStyle="bold"
-            />-->
+                android:text="@string/deptLabel"
+                android:textStyle="bold" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -110,7 +100,6 @@
             </RelativeLayout>
 
         </LinearLayout>
-
         <Button
             android:id="@+id/scanBtn123"
             android:layout_width="match_parent"
@@ -126,6 +115,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_alignParentBottom="true">
 
             <Button
@@ -135,7 +125,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/red"
+                android:textColor="@color/white"
+                android:background="@drawable/bgstyle2"
                 android:text="Scan"></Button>
 
             <Button
@@ -146,6 +137,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
+                android:textColor="@color/white"
+                android:background="@drawable/bgstyle2"
                 android:text="Save"></Button>
 
             <TextView
@@ -167,15 +160,69 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Click the button to start the Scanning"
+            android:text="@string/scanningLabel"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <HorizontalScrollView
+            android:id="@+id/headerScrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="visible">
 
-            <include layout="@layout/inv_list" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/cardlayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg_500">
+
+                    <TextView
+                        android:id="@+id/header_itemNo"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text = "@string/financeId"
+                        android:textColor="#ffffff" />
+
+                    <TextView
+                        android:id="@+id/header_prodName"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text = "@string/assetCode"
+                        android:textColor="#ffffff" />
+                    <TextView
+                        android:id="@+id/header_qty"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text = "@string/itemName"
+                        android:textColor="#ffffff" />
+                    <TextView
+                        android:id="@+id/header_loc"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text = "@string/status"
+                        android:textColor="#ffffff" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/scantablerv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@null"
+                    tools:listitem="@layout/inv_row" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
     </LinearLayout>
 </RelativeLayout>

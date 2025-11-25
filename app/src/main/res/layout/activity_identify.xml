@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please Scan the RFID Asset tag:"
+            android:text="@string/tagId_hint"
             android:padding="10dp"
             android:textStyle="bold"
             android:gravity="center"
@@ -64,7 +64,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tag ID:"
+                android:text="tagId"
                 android:padding="10dp"
                 android:layout_weight="1.1"
                 android:textStyle="bold"

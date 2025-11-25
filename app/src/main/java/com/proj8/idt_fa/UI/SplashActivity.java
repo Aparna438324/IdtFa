@@ -1,6 +1,7 @@
 package com.proj8.idt_fa.UI;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -25,9 +26,18 @@ public class SplashActivity extends AppCompatActivity {
                                       @Override
                                       public void run()
                                       {
-                                          Intent i = new Intent(SplashActivity.this, DashboardActivity.class);
-                                          startActivity(i);
-                                          finish();
+                                          SharedPreferences prefs = getSharedPreferences("IdtUser",
+                                                  MODE_PRIVATE);
+                                          UserLoggedin = prefs.getBoolean("LoggedIn",false);
+                                          if (UserLoggedin){
+                                              Intent i = new Intent(SplashActivity.this, DashboardActivity.class);
+                                              startActivity(i);
+                                              finish();
+                                          }else{
+                                              Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+                                              startActivity(i);
+                                              finish();
+                                          }
                                       }
                                   }
                 ,SPLASH_TIME_OUT);

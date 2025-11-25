@@ -7,14 +7,19 @@ import android.media.SoundPool;
 import android.media.ToneGenerator;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import com.proj8.idt_fa.Basic.BaseActivity;
 import com.proj8.idt_fa.R;
 import com.rscja.deviceapi.RFIDWithUHFUART;
 import com.rscja.deviceapi.entity.UHFTAGInfo;
+import com.rscja.deviceapi.interfaces.IUHF;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ReaderManager extends BaseActivity implements ReaderInterface {
 
@@ -30,6 +35,12 @@ public class ReaderManager extends BaseActivity implements ReaderInterface {
     private ReaderStatusListener listener;
     private boolean isReading = false;
     private TagReadCallback tagReadCallback;
+    private ContinuousTagCallback continuousCallback;
+    private volatile boolean isContinuousReading = false;
+    private boolean isLocating = false;
+    private LocationCallback locationCallback;
+    private int reconnectAttempts = 0;
+    private static final int MAX_RECONNECT_ATTEMPTS = 2;
     private ReaderManager(Context ctxt) {
         this.context = ctxt.getApplicationContext();
     }
@@ -71,8 +82,6 @@ public class ReaderManager extends BaseActivity implements ReaderInterface {
     }
 
     private class InitTask extends AsyncTask<String, Integer, Boolean> {
-//        ProgressDialog mypDialog;
-
 
         @Override
         protected Boolean doInBackground(String... params) {
@@ -84,17 +93,13 @@ public class ReaderManager extends BaseActivity implements ReaderInterface {
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
 
-//            mypDialog.cancel();
-
             if (!result) {
-                isConnected = false;
                 Log.d("Rfid Reader: ","Reader Not Connected");
-                if (listener != null) listener.onStatusChanged(false);
+                updateStatus(false);
             }else{
-                isConnected = true;
-                mReader.setPower(Power);
-                if (listener != null) listener.onStatusChanged(true);
                 Log.d("Rfid Reader: ","Reader Connected");
+                mReader.setPower(Power);
+                updateStatus(true);
             }
         }
         @Override
@@ -102,24 +107,64 @@ public class ReaderManager extends BaseActivity implements ReaderInterface {
             // TODO Auto-generated method stub
             super.onPreExecute();
             Log.d("Rfid Reader: ","Trying to Connect Reader...");
-            /*mypDialog = new ProgressDialog(context);
-            mypDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            mypDialog.setMessage("Trying to Connect Reader...");
-            mypDialog.setCanceledOnTouchOutside(false);
-            mypDialog.show();*/
         }
 
     }
+
     @Override
     public void destroy() {
-        if (mReader!=null){
-            mReader.free();
+
+        Log.d("Rfid Reader", "Destroy called");
+
+        try {
+            if (mReader != null) {
+
+                // Stop ANY active mode safely (no flag dependency)
+                try { mReader.stopInventory(); } catch (Exception ignored) {}
+                try { mReader.stopLocation(); } catch (Exception ignored) {}
+
+                try {
+                    mReader.free();
+                    Log.d("Rfid Reader", "Reader freed");
+                } catch (Exception e) {
+                    Log.e("Rfid Reader", "Error freeing reader: " + e.getMessage());
+                }
+            }
+        }
+        finally {
+
             mReader = null;
             isConnected = false;
             isInitialized = false;
-            if (listener != null) listener.onStatusChanged(false);
-            Log.d("Rfid Reader: ","Reader disconnected");
+            isReading = false;
+            isContinuousReading = false;
+            isLocating = false;
+
+            if (listener != null) {
+                listener.onStatusChanged(false);
+            }
+
+            Log.d("Rfid Reader", "Reader fully destroyed");
         }
+    }
+    public void setReaderPower(int power) {
+        Power = power;
+
+        if (mReader != null) {
+            try {
+                mReader.setPower(power);
+                Log.d("Rfid Reader", "Power updated to: " + power);
+                int p=getPower();
+                Log.d("Rfid Reader","Updated Power: "+p);
+            } catch (Exception e) {
+                Log.e("Rfid Reader", "Failed to set power: " + e.getMessage());
+            }
+        } else {
+            Log.d("Rfid Reader", "Reader not initialized yet, saving power only");
+        }
+    }
+    public int getPower() {
+        return Power;
     }
     public void sound() {
         try {
@@ -140,6 +185,12 @@ public class ReaderManager extends BaseActivity implements ReaderInterface {
 
     public void setStatusListener(ReaderStatusListener listener) {
         this.listener = listener;
+//        listener.onStatusChanged(isConnected);
+    }
+
+    private void updateStatus(boolean connected) {
+        isConnected = connected;
+        if (listener != null) listener.onStatusChanged(connected);
     }
     public boolean isConnected() {
         return isConnected;
@@ -186,9 +237,122 @@ public class ReaderManager extends BaseActivity implements ReaderInterface {
     public boolean isInitialized() {
         return isInitialized;
     }
+    public boolean isContinuousReading() {
+        return isContinuousReading;
+    }
+
     public void reconnect(int powerValue) {
+
+//        reconnectAttempts = 0;
+//        attemptReconnect(powerValue);
         destroy();              // safely disconnect first
         initUhf(powerValue);    // then re-init
+    }
+    private void attemptReconnect(int powerValue) {
+        reconnectAttempts++;
+
+        destroy();
+        initUhf(powerValue);
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            if (!isConnected) {
+                if (reconnectAttempts <= MAX_RECONNECT_ATTEMPTS) {
+                    Log.d("Rfid Reader", "Reconnect failed. Retrying... Attempt " + reconnectAttempts);
+                    attemptReconnect(powerValue);
+                } else {
+                    Log.d("Rfid Reader", "Reconnect failed after max attempts");
+
+                    if (listener != null) {
+                        listener.onStatusChanged(false);
+                    }
+                }
+            }
+        }, 2500);
+    }
+    public void startContinuousRead(ContinuousTagCallback callback) {
+        this.continuousCallback = callback;
+        if (isContinuousReading) {
+            Log.d("ReaderManager", "Continuous reading already running.");
+            return;
+        }
+        if (!mReader.startInventoryTag()) {
+            if (callback != null) callback.onError("Failed to start inventory");
+            return;
+        }
+        isContinuousReading = true;
+
+        new Thread(() -> {
+            Log.d("ReaderManager", "Continuous reading thread started");
+            while (isContinuousReading) {
+                UHFTAGInfo tag = mReader.readTagFromBuffer();
+                if (tag != null) {
+                    String epc = tag.getEPC();
+                    String rssi = tag.getRssi();
+
+                    if (epc != null && epc.length() > 7) {
+                        if (continuousCallback != null) {
+                            continuousCallback.onTagRead(epc, rssi);
+                        }
+                    }
+                }
+            }
+
+            Log.d("ReaderManager", "Continuous reading thread stopped");
+        }).start();
+    }
+
+    public void stopContinuousRead() {
+        if (!isContinuousReading) return;
+        isContinuousReading = false;
+        mReader.stopInventory();
+
+        if (continuousCallback != null) {
+            continuousCallback.onStopped();
+        }
+    }
+    public void startLocation(String epc, LocationCallback callback) {
+        this.locationCallback = callback;
+
+        if (mReader == null || !isConnected) {
+            callback.onError("Reader not connected");
+            return;
+        }
+
+        isLocating = true;
+
+        boolean result = false;
+
+        try {
+            result = mReader.startLocation(
+                    context,
+                    epc,
+                    IUHF.Bank_EPC,
+                    32,
+                    (value, flag) -> {
+                        if (locationCallback != null && isLocating) {
+                            locationCallback.onLocationValue(value, flag);
+                        }
+                    }
+            );
+        } catch (Exception e) {
+            callback.onError("Location start failed: " + e.getMessage());
+            return;
+        }
+
+        if (!result) {
+            callback.onError("Failed to start location");
+        }
+    }
+    public void stopLocation() {
+        isLocating = false;
+
+        try {
+            if (mReader != null) {
+                mReader.stopLocation();
+            }
+        } catch (Exception e) {
+            Log.e("Rfid Reader", "Error stopping location: " + e.getMessage());
+        }
     }
 
 }

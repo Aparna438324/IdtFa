@@ -6,6 +6,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class HelperFunctions {
@@ -47,4 +49,24 @@ public class HelperFunctions {
     public void setProgress(int progressVal){
         progressDialog.setProgress(progressVal);
     }
+
+    public static String getTodaysDate(String dateFormat) {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat(dateFormat);
+        String formattedDate = df.format(c.getTime());
+        return formattedDate;
+    }
+    public static class DateFormats {
+
+        public static String DATE_FORMAT_DD_MMM_YYYY = "dd MMM yyyy";
+        public static String DATE_FORMAT_DASH = "dd-MM-yyyy";
+
+        public static String TIME_FORMAT_12 = "hh:mm a";
+        public static String TIME_FORMAT_24 = "HH:mm:ss";
+
+        public static String DATETIME_FORMAT_24 = "dd-MM-yyyy HH:mm:ss";
+        public static String DATETIME_FORMAT_DB = "yyyy-MM-dd HH:mm:ss";
+        public static String DATETIME_FORMAT_12 = "dd-MM-yyyy hh:mm a";
+    }
+
 }

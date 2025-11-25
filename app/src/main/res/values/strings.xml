@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Idt_Fa</string>
+    <string name="plantLabel">Plant:</string>
+    <string name="deptLabel">Department:</string>
+    <string name="scanningLabel">Click the button to start the Scanning</string>
+    <string name="tagId_hint">Please Scan RFID tag</string>
+    <string name="tagIdEnterHint">Please Enter Tag ID</string>
+    <string name="tagId">Tag ID</string>
+    <string name="financeId">Finance ID</string>
+    <string name="assetCode">IT Asset Code</string>
+    <string name="itemName">Item Name</string>
+    <string name="status">Status</string>
+    <string name="scanToSearch">Scan</string>
+    <string name="scanningSearch">Scanning.....</string>
 </resources>

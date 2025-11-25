@@ -13,16 +13,25 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Idt_Fa"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".UI.SearchActivity"
+            android:parentActivityName=".UI.DashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".UI.InventoryActivity"
+            android:parentActivityName=".UI.DashboardActivity"
             android:exported="false" />
         <activity
             android:name=".UI.IdentifyActivity"
+            android:parentActivityName=".UI.DashboardActivity"
             android:exported="false" />
         <activity
             android:name=".UI.SplashActivity"
